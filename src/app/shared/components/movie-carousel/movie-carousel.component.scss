@@ -1,0 +1,12 @@
+.carousel { margin-bottom: var(--space-xl); }
+.carousel__header { display:flex; align-items:center; justify-content:space-between; margin-bottom:var(--space-md); padding-right:var(--space-md); }
+.carousel__title { display:flex; align-items:center; gap:var(--space-sm); font-size:var(--font-size-xl); font-weight:600; color:var(--text-primary); }
+.carousel__title::before { content:''; width:4px; height:1.2em; background:#5865F2; border-radius:2px; }
+.carousel__controls { display:flex; gap:var(--space-xs); }
+.carousel__control { display:flex; align-items:center; justify-content:center; width:40px; height:40px; border:1px solid var(--glass-border); border-radius:var(--radius-full); background:var(--bg-card); color:var(--text-secondary); cursor:pointer; transition:all var(--transition-fast); }
+.carousel__control:hover { background:var(--bg-elevated); color:var(--text-primary); border-color:var(--color-primary); }
+.carousel__control:active { transform:scale(0.95); }
+.carousel__track { display:flex; gap:var(--space-md); padding:var(--space-sm) 0; overflow-x:auto; scroll-snap-type:x mandatory; scroll-behavior:smooth; scrollbar-width:none; -ms-overflow-style:none; }
+.carousel__track::-webkit-scrollbar { display:none; }
+.carousel__track > * { flex-shrink:0; scroll-snap-align:start; }
+.carousel__item { width:var(--card-width); flex-shrink:0; }

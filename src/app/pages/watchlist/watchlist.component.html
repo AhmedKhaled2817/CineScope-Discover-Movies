@@ -1,0 +1,38 @@
+<app-header />
+
+<main class="watchlist-page">
+  <div class="watchlist-page__container">
+    <!-- Header -->
+    <div class="watchlist-page__header">
+      <h1>My Watchlist</h1>
+      <p class="watchlist-page__count">
+        {{ watchlistCount() }} {{ watchlistCount() === 1 ? 'movie' : 'movies' }} saved
+      </p>
+    </div>
+
+    @if (watchlistCount() === 0) {
+      <!-- Empty State -->
+      <div class="watchlist-page__empty">
+        <div class="watchlist-page__empty-icon">🎬</div>
+        <h2>Your watchlist is empty</h2>
+        <p>Start exploring movies and add them to your watchlist!</p>
+        <a routerLink="/home" class="btn-primary">Browse Movies</a>
+      </div>
+    } @else {
+      <!-- Watchlist Grid -->
+      <app-movie-list
+        [movies]="watchlistAsSearchResults()"
+        [showWatchlistButton]="true"
+      ></app-movie-list>
+
+      <!-- Clear All Button -->
+      <div class="watchlist-page__actions">
+        <button class="btn-secondary" (click)="clearAll()">
+          Clear Watchlist
+        </button>
+      </div>
+    }
+  </div>
+</main>
+
+<app-footer />

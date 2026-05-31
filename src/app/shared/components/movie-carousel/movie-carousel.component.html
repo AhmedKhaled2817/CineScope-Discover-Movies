@@ -1,0 +1,27 @@
+<section class="carousel">
+  <div class="carousel__header">
+    <h2 class="carousel__title">{{ title() }}</h2>
+    <div class="carousel__controls">
+      <button class="carousel__control" (click)="scroll('left')" aria-label="Scroll left">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+      </button>
+      <button class="carousel__control" (click)="scroll('right')" aria-label="Scroll right">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="carousel__track" #carouselTrack>
+    @if (loading()) {
+      @for (i of skeletonCount; track i) {
+        <app-skeleton-loader type="card"></app-skeleton-loader>
+      }
+    } @else {
+      @for (movie of movies(); track movie.imdbID) {
+        <div class="carousel__item">
+          <app-movie-card [movie]="movie" [showWatchlistButton]="true"></app-movie-card>
+        </div>
+      }
+    }
+  </div>
+</section>

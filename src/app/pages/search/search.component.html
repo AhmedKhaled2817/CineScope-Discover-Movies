@@ -1,0 +1,59 @@
+<app-header />
+
+<main class="search-page">
+  <div class="search-page__container">
+    <!-- Search Header -->
+    <div class="search-page__header">
+      <h1>Search Movies</h1>
+      <div class="search-page__bar">
+        <app-search-bar (searchChanged)="onSearchChange($event)" />
+      </div>
+    </div>
+
+    <!-- Search Info -->
+    @if (query()) {
+      <div class="search-page__info">
+        <p>
+          @if (totalResults() > 0) {
+            Showing {{ movies().length }} of {{ totalResults() }} results for
+            <strong>"{{ query() }}"</strong>
+          } @else if (!loading()) {
+            No results found for <strong>"{{ query() }}"</strong>
+          }
+        </p>
+      </div>
+    }
+
+    <!-- Results -->
+    <app-movie-list
+      [movies]="movies()"
+      [loading]="loading()"
+      [emptyMessage]="query() ? 'No movies found for your search' : 'Start typing to search for movies'"
+    ></app-movie-list>
+
+    <!-- Pagination -->
+    @if (totalPages() > 1 && movies().length > 0) {
+      <div class="search-page__pagination">
+        <button
+          class="btn-secondary"
+          [disabled]="currentPage() <= 1"
+          (click)="changePage(currentPage() - 1)"
+        >
+          Previous
+        </button>
+        <span class="search-page__page-info">
+          Page {{ currentPage() }} of {{ totalPages() }}
+        </span>
+        <button
+          class="btn-secondary"
+          [disabled]="currentPage() >= totalPages()"
+          (click)="changePage(currentPage() + 1)"
+        >
+          Next
+        </button>
+      </div>
+    }
+  </div>
+</main>
+
+<app-footer />

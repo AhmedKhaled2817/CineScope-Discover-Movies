@@ -1,0 +1,13 @@
+<app-header />
+<main class="premium-page">
+  <div class="premium-container">
+    <h1>Premium Area</h1>
+    @if (isPremium()) {
+      <p>Welcome back, premium member! Enjoy exclusive content.</p>
+    } @else {
+      <p>This content is for premium members only. Upgrade to access.</p>
+      <button class="btn-primary" (click)="upgrade()">Upgrade (demo)</button>
+    }
+  </div>
+</main>
+<app-footer />

@@ -1,0 +1,5 @@
+.premium-page { min-height:100vh; padding-bottom:var(--space-3xl); }
+.premium-container { max-width:var(--container-max); margin:0 auto; padding:calc(var(--header-height) + var(--space-xl)) var(--space-xl) var(--space-xl); text-align:center; }
+.premium-container h1 { font-size:var(--font-size-3xl); margin-bottom:var(--space-md); }
+.premium-container p { color:var(--text-secondary); margin-bottom:var(--space-md); }
+.premium-container .btn-primary { margin-top:var(--space-sm); }

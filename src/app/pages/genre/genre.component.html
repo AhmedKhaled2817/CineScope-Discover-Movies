@@ -1,0 +1,39 @@
+<app-header />
+
+<main class="genre-page">
+  <div class="genre-page__container">
+    <!-- Header -->
+    <div class="genre-page__header">
+      <nav class="genre-page__breadcrumb">
+        <a routerLink="/home">Home</a>
+        <span>/</span>
+        <span>{{ genreName() }}</span>
+      </nav>
+      <h1 class="genre-page__title">{{ genreName() | titlecase }} Movies</h1>
+    </div>
+
+    <!-- Movies List -->
+    <app-movie-list
+      [movies]="movies()"
+      [loading]="loading()"
+      [emptyMessage]="'No ' + genreName() + ' movies found'"
+    ></app-movie-list>
+
+    <!-- Load More -->
+    @if (hasMore() && !loading() && !loadingMore()) {
+      <div class="genre-page__load-more">
+        <button class="btn-primary" (click)="loadMore()">
+          Load More Movies
+        </button>
+      </div>
+    }
+
+    @if (loadingMore()) {
+      <div class="genre-page__loading">
+        <span class="spinner"></span> Loading more...
+      </div>
+    }
+  </div>
+</main>
+
+<app-footer />

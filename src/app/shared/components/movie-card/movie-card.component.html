@@ -1,0 +1,43 @@
+<article class="movie-card" [routerLink]="['/movie', movie().imdbID]">
+  <div class="movie-card__poster">
+    <img [appLazyImage]="movie().Poster" [alt]="movie().Title" class="movie-card__image" />
+    <div class="movie-card__overlay">
+      <span class="movie-card__view">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+          <polygon points="8,5 19,12 8,19" />
+        </svg>
+        View Details
+      </span>
+    </div>
+  </div>
+
+  <div class="movie-card__info">
+    <h3 class="movie-card__title">{{ movie().Title }}</h3>
+    <div class="movie-card__meta">
+      <span class="movie-card__year">{{ movie().Year }}</span>
+      @if (showRating() && rating()) {
+        <span class="movie-card__rating">{{ rating() | rating }}</span>
+      }
+    </div>
+  </div>
+
+  @if (showWatchlistButton()) {
+    <button
+      class="movie-card__watchlist"
+      [class.movie-card__watchlist--active]="isInWatchlist()"
+      (click)="onWatchlistClick($event)"
+      [attr.aria-label]="isInWatchlist() ? 'Remove from watchlist' : 'Add to watchlist'"
+      [title]="isInWatchlist() ? 'Remove from Watchlist' : 'Add to Watchlist'"
+    >
+      @if (isInWatchlist()) {
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+        </svg>
+      } @else {
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+        </svg>
+      }
+    </button>
+  }
+</article>

@@ -1,0 +1,22 @@
+<div class="movie-list">
+  @if (loading()) {
+    <div class="movie-list__grid">
+      @for (i of skeletonCount; track i) {
+        <app-skeleton-loader type="card" class="stagger-{{ i }}"></app-skeleton-loader>
+      }
+    </div>
+  } @else if (movies().length === 0) {
+    <div class="movie-list__empty">
+      <div class="movie-list__empty-icon">🎬</div>
+      <p class="movie-list__empty-text">{{ emptyMessage() }}</p>
+    </div>
+  } @else {
+    <div class="movie-list__grid">
+      @for (movie of movies(); track movie.imdbID; let i = $index) {
+        <div class="movie-list__item">
+          <app-movie-card [movie]="movie" [showWatchlistButton]="showWatchlistButton()" class="animate-fade-in-up stagger-{{ (i % 10) + 1 }}"></app-movie-card>
+        </div>
+      }
+    </div>
+  }
+</div>

@@ -1,0 +1,59 @@
+<app-header />
+<main class="auth-page">
+  <div class="auth-grid">
+    <section class="auth-card auth-card--signin">
+      <div class="auth-card__header">
+        <div class="brand-badge">
+          <span class="brand-icon">▶</span>
+          <div>
+            <strong>CineScope</strong>
+            <small>Discover Movies</small>
+          </div>
+        </div>
+        <div class="auth-card__title">
+          <h1>Welcome Back</h1>
+          <p>Sign in to continue to CineScope</p>
+        </div>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="auth-form">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <span matPrefix class="input-icon">✉️</span>
+          <input matInput formControlName="email" autocomplete="email" placeholder="Enter your email" />
+          <mat-error *ngIf="form.get('email')?.hasError('required')">Email is required</mat-error>
+          <mat-error *ngIf="form.get('email')?.hasError('email')">Enter a valid email</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <span matPrefix class="input-icon">🔒</span>
+          <input matInput formControlName="password" [type]="passwordVisible ? 'text' : 'password'" autocomplete="current-password" placeholder="Enter your password" />
+          <button mat-icon-button matSuffix type="button" class="password-toggle" (click)="togglePasswordVisibility()" [attr.aria-label]="passwordVisible ? 'Hide password' : 'Show password'">
+            {{ passwordVisible ? '🙈' : '👁️' }}
+          </button>
+          <mat-error *ngIf="form.get('password')?.hasError('required')">Password is required</mat-error>
+          <mat-error *ngIf="form.get('password')?.hasError('minlength')">At least 6 characters</mat-error>
+        </mat-form-field>
+
+        <div class="auth-inline">
+          <mat-checkbox formControlName="rememberMe">Remember me</mat-checkbox>
+          <a class="text-link" href="#">Forgot password?</a>
+        </div>
+
+        <button mat-raised-button color="primary" class="auth-submit" type="submit" [disabled]="form.invalid">Sign In</button>
+      </form>
+
+      <div class="divider"><span>or continue with</span></div>
+      <div class="auth-social">
+        <button type="button" class="social-btn social-btn--google">Google</button>
+        <button type="button" class="social-btn social-btn--apple">Apple</button>
+      </div>
+
+      <div class="auth-footer">
+        Don't have an account? <a routerLink="/signup">Sign up</a>
+      </div>
+    </section>
+  </div>
+</main>
+<app-footer />

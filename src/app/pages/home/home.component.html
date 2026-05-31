@@ -1,0 +1,52 @@
+<app-header />
+
+@if (loading()) {
+  <!-- Loading spinner for in-app navigation -->
+  <div class="page-loading">
+    <div class="page-loading__spinner"></div>
+  </div>
+} @else {
+  <main class="home">
+    <!-- Hero Section -->
+    @if (featuredMovie()) {
+      <section class="hero">
+        <div class="hero__background">
+          <img [src]="featuredMovie()!.Poster" [alt]="" class="hero__bg-image" />
+          <div class="hero__overlay"></div>
+        </div>
+        <div class="hero__container">
+          <div class="hero__poster">
+            <img [src]="featuredMovie()!.Poster" [alt]="featuredMovie()!.Title" />
+            <div class="hero__poster-glow"></div>
+          </div>
+          <div class="hero__content">
+            <span class="hero__badge">Featured</span>
+            <h1 class="hero__title">{{ featuredMovie()!.Title }}</h1>
+            <p class="hero__year">{{ featuredMovie()!.Year }}</p>
+            <div class="hero__actions">
+              <a [routerLink]="['/movie', featuredMovie()!.imdbID]" class="hero__btn hero__btn--primary">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+                View Details
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    }
+
+    <!-- Category Carousels -->
+    <div class="home__categories">
+      @for (category of categories(); track category.keyword) {
+        <app-movie-carousel
+          [title]="category.title"
+          [movies]="category.movies"
+          [loading]="false"
+        ></app-movie-carousel>
+      }
+    </div>
+  </main>
+
+  <app-footer />
+}
